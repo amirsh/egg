@@ -197,6 +197,20 @@ impl<L: Language, N: Analysis<L>> std::ops::IndexMut<Id> for EGraph<L, N> {
     }
 }
 
+impl<L: Language, N: Analysis<L>> EGraph<L, N> where N::Data: Default {
+    pub fn reserve(&mut self) -> Id {
+        let id = self.unionfind.make_set();
+        let class = EClass {
+            id,
+            nodes: vec![],
+            data: Default::default(),
+            parents: Default::default(),
+        };
+        self.classes.insert(id, class);
+        id
+    }
+}
+
 impl<L: Language, N: Analysis<L>> EGraph<L, N> {
     /// Adds a [`RecExpr`] to the [`EGraph`].
     ///
