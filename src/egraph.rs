@@ -198,6 +198,7 @@ impl<L: Language, N: Analysis<L>> std::ops::IndexMut<Id> for EGraph<L, N> {
 }
 
 impl<L: Language, N: Analysis<L>> EGraph<L, N> where N::Data: Default {
+    /// Create a new empty e-class in the e-graph, returning its id.
     pub fn reserve(&mut self) -> Id {
         let id = self.unionfind.make_set();
         let class = EClass {
