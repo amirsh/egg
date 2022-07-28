@@ -32,13 +32,13 @@ where
         let mut d = f.debug_struct("Rewrite");
         d.field("name", &self.name);
 
-        if let Some(pat) = Any::downcast_ref::<Pattern<L>>(&self.searcher) {
+        if let Some(pat) = <dyn Any>::downcast_ref::<Pattern<L>>(&self.searcher) {
             d.field("searcher", &DisplayAsDebug(pat));
         } else {
             d.field("searcher", &"<< searcher >>");
         }
 
-        if let Some(pat) = Any::downcast_ref::<Pattern<L>>(&self.applier) {
+        if let Some(pat) = <dyn Any>::downcast_ref::<Pattern<L>>(&self.applier) {
             d.field("applier", &DisplayAsDebug(pat));
         } else {
             d.field("applier", &"<< applier >>");
