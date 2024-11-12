@@ -483,7 +483,7 @@ where
             return Err(StopReason::TimeLimit(elapsed.as_secs_f64()));
         }
 
-        let size = self.egraph.total_size();
+        let size = self.egraph.total_number_of_nodes();
         if size > self.node_limit {
             return Err(StopReason::NodeLimit(size));
         }
